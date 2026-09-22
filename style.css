@@ -1,0 +1,260 @@
+/* ============================================================
+   THEME — edit this block to restyle the whole site.
+   Everything below :root uses these variables, so changing a
+   color or font here updates every element that uses it.
+   ============================================================ */
+:root {
+  /* --- Fonts ---
+     If you swap these, also update the Google Fonts <link> in
+     index.html <head> to load the new families. */
+  --font-display: "Source Serif 4", Georgia, serif;   /* headings */
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; /* body text */
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace; /* dates, labels, numbers */
+
+  /* --- Light mode palette --- */
+  --bg: #f5f4f0;            /* page background */
+  --card: #fdfcfa;          /* cards, panels */
+  --card-strong: #ffffff;
+  --ink: #1c2430;           /* main text */
+  --ink-soft: #4f5867;      /* secondary text */
+  --ink-faint: #838c98;     /* muted labels */
+  --rule: #dfdcd3;          /* hairline borders */
+  --rule-strong: #a9a394;   /* stronger borders */
+  --accent: #b5722e;        /* primary accent (buttons, highlights) */
+  --accent-ink: #8f5a22;    /* accent hover/active */
+  --accent-tint: rgba(181, 114, 46, 0.10); /* accent background wash */
+  --shadow: rgba(28, 36, 48, 0.10);
+
+  /* ------------------------------------------------------------
+     ALTERNATE PALETTES — copy a block over the "Light mode
+     palette" values above to switch the whole site's look.
+     ------------------------------------------------------------
+
+     -- Cool slate + teal (calm, corporate) --
+     --bg: #f2f4f6; --card: #ffffff; --card-strong: #ffffff;
+     --ink: #16222e; --ink-soft: #4a5c6b; --ink-faint: #8496a3;
+     --rule: #dde3e8; --rule-strong: #aebccb;
+     --accent: #1f7a6c; --accent-ink: #175f54;
+     --accent-tint: rgba(31, 122, 108, 0.10);
+
+     -- Warm plum (distinctive, still professional) --
+     --bg: #f6f2f3; --card: #ffffff; --card-strong: #ffffff;
+     --ink: #2a1c26; --ink-soft: #5c4a54; --ink-faint: #8c7a84;
+     --rule: #e6dbe0; --rule-strong: #c7b2bc;
+     --accent: #7a3b56; --accent-ink: #5e2c41;
+     --accent-tint: rgba(122, 59, 86, 0.09);
+
+     -- Deep navy (bold, high-contrast) --
+     --bg: #eef1f5; --card: #ffffff; --card-strong: #ffffff;
+     --ink: #101828; --ink-soft: #46536b; --ink-faint: #7c8aa3;
+     --rule: #dbe1ea; --rule-strong: #aebbd1;
+     --accent: #2547a0; --accent-ink: #1b3679;
+     --accent-tint: rgba(37, 71, 160, 0.10);
+  */
+}
+
+/* --- Dark mode: mirrors the palette above. Edit both together. --- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151a;
+    --card: #191d24;
+    --card-strong: #1f242c;
+    --ink: #eceef1;
+    --ink-soft: #b3bac5;
+    --ink-faint: #808a99;
+    --rule: #2a303a;
+    --rule-strong: #414a58;
+    --accent: #e0964f;
+    --accent-ink: #eeb279;
+    --accent-tint: rgba(224, 150, 79, 0.12);
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151a;
+  --card: #191d24;
+  --card-strong: #1f242c;
+  --ink: #eceef1;
+  --ink-soft: #b3bac5;
+  --ink-faint: #808a99;
+  --rule: #2a303a;
+  --rule-strong: #414a58;
+  --accent: #e0964f;
+  --accent-ink: #eeb279;
+  --accent-tint: rgba(224, 150, 79, 0.12);
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--ink);
+}
+
+a { color: inherit; }
+
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+header.site {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  white-space: nowrap;
+}
+.brand .dot { color: var(--accent); }
+nav.links { display: flex; gap: 20px; font-size: 0.88rem; color: var(--ink-soft); }
+nav.links a { text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+nav.links a:hover { border-bottom-color: var(--rule-strong); color: var(--ink); }
+@media (max-width: 560px) { nav.links { gap: 12px; font-size: 0.8rem; } }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero { padding: 64px 0 40px; position: relative; }
+.hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start; }
+@media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; } }
+
+.eyebrow-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; opacity: 0; animation: settle 0.7s ease-out 0.05s forwards; }
+.stamp-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1.5px solid var(--accent); color: var(--accent);
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em;
+  padding: 5px 10px 5px 8px; border-radius: 20px;
+}
+.stamp-badge svg { width: 12px; height: 12px; }
+
+h1.name { font-size: clamp(2.3rem, 5.5vw, 3.4rem); letter-spacing: -0.01em; opacity: 0; animation: settle 0.7s ease-out 0.15s forwards; }
+.role-line { margin-top: 10px; color: var(--ink-soft); font-size: 1.05rem; max-width: 48ch; opacity: 0; animation: settle 0.7s ease-out 0.25s forwards; }
+.role-line strong { color: var(--ink); font-weight: 600; }
+
+.contact-row { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 0.86rem; color: var(--ink-soft); opacity: 0; animation: settle 0.7s ease-out 0.35s forwards; }
+.contact-row a { text-decoration: none; border-bottom: 1px dashed var(--rule-strong); padding-bottom: 1px; }
+.contact-row a:hover { color: var(--accent); border-color: var(--accent); }
+
+@keyframes settle { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow-row, h1.name, .role-line, .contact-row { animation: none; opacity: 1; }
+}
+
+.ledger-card { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; box-shadow: 0 1px 0 var(--shadow); overflow: hidden; }
+.ledger-card .lc-head { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--ink-faint); padding: 10px 16px; border-bottom: 1px solid var(--rule); }
+.ledger-row { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 16px; border-bottom: 1px solid var(--rule); font-size: 0.86rem; gap: 12px; }
+.ledger-row:last-child { border-bottom: none; }
+.ledger-row .k { color: var(--ink-soft); }
+.ledger-row .v { font-weight: 600; text-align: right; }
+.ledger-row .v.num { font-weight: 500; font-size: 0.92rem; }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+section { padding: 52px 0; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: none; }
+.sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
+.sec-num { font-family: var(--font-mono); color: var(--accent); font-size: 0.82rem; }
+.sec-head h2 { font-size: 1.5rem; }
+.sec-note { color: var(--ink-faint); font-size: 0.88rem; margin-top: -14px; margin-bottom: 24px; max-width: 60ch; }
+
+.summary-text { font-size: 1.08rem; max-width: 66ch; color: var(--ink-soft); }
+.summary-text strong { color: var(--ink); font-weight: 600; }
+
+/* Services */
+.service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 640px) { .service-grid { grid-template-columns: 1fr; } }
+.service-card { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 20px; }
+.service-card .s-icon { font-size: 1.4rem; margin-bottom: 10px; }
+.service-card h3 { font-size: 1rem; margin-bottom: 6px; }
+.service-card p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+.project-card { margin-top: 20px; background: var(--accent-tint); border: 1px solid var(--rule-strong); border-radius: 8px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; }
+.project-card .icon { font-size: 1.3rem; line-height: 1; margin-top: 2px; }
+.project-card h3 { font-size: 1rem; margin-bottom: 6px; }
+.project-card p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; max-width: 56ch; }
+
+/* Skills */
+.skill-groups { display: grid; gap: 26px; }
+.skill-group-label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--ink-faint); margin-bottom: 10px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid var(--rule); background: var(--card); color: var(--ink-soft); font-size: 0.85rem; padding: 6px 12px; border-radius: 20px; }
+.tag.strong { color: var(--ink); border-color: var(--rule-strong); }
+
+/* Experience */
+.entry { display: grid; grid-template-columns: 100px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--rule); }
+.entry:first-child { border-top: none; padding-top: 0; }
+@media (max-width: 600px) { .entry { grid-template-columns: 1fr; gap: 6px; } }
+.entry .period { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-faint); padding-top: 3px; }
+.entry .role { font-size: 1.08rem; font-weight: 600; }
+.entry .org { color: var(--accent); font-size: 0.92rem; margin-top: 2px; margin-bottom: 10px; font-weight: 500; }
+.entry ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.93rem; }
+.entry li { margin-bottom: 6px; }
+.entry li::marker { color: var(--rule-strong); }
+
+/* Education */
+.edu-grid { display: grid; gap: 18px; }
+.edu-item { display: flex; justify-content: space-between; gap: 16px; padding: 16px 18px; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; }
+.edu-item .school { font-weight: 600; }
+.edu-item .prog { color: var(--ink-soft); font-size: 0.9rem; margin-top: 3px; }
+.edu-item .yrs { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-faint); white-space: nowrap; padding-top: 2px; }
+@media (max-width: 520px) { .edu-item { flex-direction: column; } }
+
+/* Achievements */
+.ach-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ach-list li { display: flex; align-items: baseline; gap: 10px; font-size: 0.96rem; color: var(--ink-soft); }
+.ach-list li::before { content: "—"; color: var(--accent); }
+.lang-row { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Footer */
+footer.site { padding: 56px 0; text-align: center; border-top: 1px solid var(--rule); }
+footer.site h2 { font-size: 1.7rem; margin-bottom: 12px; }
+footer.site p { color: var(--ink-soft); max-width: 48ch; margin: 0 auto 26px; }
+.cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 20px; font-size: 0.92rem; font-weight: 500; text-decoration: none; border: 1px solid var(--rule-strong); }
+.btn.primary { background: var(--accent); color: #fffaf4; border-color: var(--accent); }
+.btn.primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+.btn.ghost { color: var(--ink); background: transparent; }
+.btn.ghost:hover { border-color: var(--ink); }
+.foot-meta { margin-top: 40px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); }
+.copied-note { font-size: 0.78rem; color: var(--accent); margin-top: 10px; min-height: 1.2em; }
